@@ -1,50 +1,46 @@
-import { GeistSans } from 'geist/font/sans'
-import ThemeProvider from '@/providers/ThemeProvider'
-import NextTopLoader from 'nextjs-toploader'
-import { Analytics } from '@vercel/analytics/react'
-import './globals.css'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import ReactQueryProvider from '@/providers/ReactQueryProvider'
+// src/app/layout.tsx
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000'
+import { ReactNode } from 'react'
 
 export const metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  title: 'Boatly',
+  description: 'Rent dream boats worldwide',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+interface RootLayoutProps {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      className={GeistSans.className}
-      style={{ colorScheme: 'dark' }}
-      suppressHydrationWarning
-    >
-      <body className="bg-background text-foreground">
-        <NextTopLoader showSpinner={false} height={2} color="#2acf80" />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ReactQueryProvider>
-            <main className="flex min-h-screen flex-col items-center">
-              {children}
-              <Analytics />{' '}
-              {/* ^^ remove this if you are not deploying to vercel. See more at https://vercel.com/docs/analytics  */}
-            </main>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </ReactQueryProvider>
-        </ThemeProvider>
+    <html lang="de">
+      <head>
+        {/* Google Fonts preload */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link 
+          rel="preconnect" 
+          href="https://fonts.gstatic.com" 
+          crossOrigin="anonymous" 
+        />
+        {/* Poppins in den Gewichten 400,500,700 */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        style={{
+          margin: 0,
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          background: '#000',
+          color: '#fff',
+          fontFamily: "'Poppins', sans-serif",
+        }}
+      >
+        {children}
       </body>
     </html>
   )

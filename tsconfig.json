@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,22 +18,40 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    // macht @/foo → ./src/foo möglich
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["src/components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/*": ["src/*"]},
-    "types": ["@testing-library/jest-dom"]
+      "@/*": [
+        "src/*"
+      ],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/lib/*": [
+        "lib/*"
+      ]
+    },
+    // Jest-Types etc.
+    "types": [
+      "@testing-library/jest-dom"
+    ]
   },
+  // Hier stellen wir sicher, dass TS ALLE Dateien in src/ und lib/ sieht:
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "types.d.ts",
     "next-env.d.ts",
+    "types.d.ts",
+    "src/**/*",
+    "lib/**/*",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".next", "out"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out"
+  ]
 }

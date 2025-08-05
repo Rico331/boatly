@@ -1,18 +1,18 @@
-import { createServerSupabaseClient } from '@/lib/supabase'
-import BoatCard from '@/components/BoatCard' // oder dein Card-Component
+// src/app/(public)/page.tsx
+import Nav from '@/components/Nav'
+import Hero from '@/components/landing/Hero'
+import Features from '@/components/landing/Features'
+import FooterCTA from '@/components/landing/FooterCTA'
 
-export default async function Home() {
-  const supabase = createServerSupabaseClient()
-  const { data: boats } = await supabase
-    .from('boats')
-    .select('*')
-    .limit(12)
-
+export default function LandingPage() {
   return (
-    <main className="container mx-auto py-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {boats?.map((b) => (
-        <BoatCard key={b.id} boat={b} />
-      ))}
-    </main>
+    <>
+      <Nav />
+      <main className="flex flex-col">
+        <Hero />
+        <Features />
+        <FooterCTA />
+      </main>
+    </>
   )
 }
