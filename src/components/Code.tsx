@@ -36,12 +36,12 @@ const CheckIcon = () => (
 )
 
 export default function Code({ code }: { code: string }) {
-  const [icon, setIcon] = useState(CopyIcon)
+  const [Icon, setIcon] = useState(() => CopyIcon)
 
   const copy = async () => {
     await navigator?.clipboard?.writeText(code)
-    setIcon(CheckIcon)
-    setTimeout(() => setIcon(CopyIcon), 2000)
+    setIcon(() => CheckIcon)
+    setTimeout(() => setIcon(() => CopyIcon), 2000)
   }
 
   return (
@@ -50,7 +50,7 @@ export default function Code({ code }: { code: string }) {
         onClick={copy}
         className="absolute right-4 top-4  rounded-md bg-foreground/5 p-2 hover:bg-foreground/10"
       >
-        {icon}
+        <Icon />
       </button>
       <code>{code}</code>
     </pre>
